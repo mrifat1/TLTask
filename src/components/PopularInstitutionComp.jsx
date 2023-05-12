@@ -49,7 +49,7 @@ const PopularInstitutionComp = () => {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text style={styles.title}>Popular Teachers</Text>
+        <Text style={styles.title}>Popular Institution</Text>
         {filterClick ? (
           <TouchableOpacity
             onPress={() => setFilterclick(!filterClick)}

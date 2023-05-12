@@ -55,7 +55,11 @@ const InstitutionCard = ({item, index}) => {
             rating={item?.rating}
             onChange={() => console.log('clicked')}
           />
-          <Text>{item?.ratingValue}</Text>
+          <Text>
+            {item?.rating} {'('}
+            {item?.ratingValue}
+            {')'}
+          </Text>
         </View>
         <Text
           style={{
