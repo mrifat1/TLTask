@@ -3,6 +3,8 @@ import React from 'react';
 import {colors} from '../constants/Theme';
 import {RFValue, hp, wp} from '../lib';
 import HeaderComp from '../components/HeaderComp';
+import SearchBar from '../components/SearchComp';
+import PopularTeacherComp from '../components/PopularTeacherComp';
 
 const ExploreScreen = () => {
   return (
@@ -12,9 +14,11 @@ const ExploreScreen = () => {
         // alignItems: 'center',
         flex: 1,
         paddingVertical: hp(2),
-        paddingHorizontal: wp(4),
+        paddingHorizontal: wp(5),
       }}>
       <HeaderComp />
+      <SearchBar />
+      <PopularTeacherComp />
     </View>
   );
 };

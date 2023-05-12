@@ -2,7 +2,8 @@ import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import {colors} from '../constants/Theme';
 import {RFValue, hp, wp} from '../lib';
-
+// import {SvgUri} from 'react-native-svg';
+import SVGImg from '../assets/images/profile.svg';
 const HeaderComp = () => {
   return (
     <View style={styles.container}>
@@ -11,7 +12,12 @@ const HeaderComp = () => {
         <Text style={styles.subTitle}>Hardline Scott</Text>
       </View>
       <View style={styles.image}>
-        <Text>H</Text>
+        {/* <SvgUri
+          width={hp(7)}
+          height={wp(5)}
+          source={require('../assets/images/profile.svg')}
+        /> */}
+        <SVGImg height={hp(8)} width={wp(15)} />
       </View>
     </View>
   );
@@ -19,6 +25,8 @@ const HeaderComp = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   title: {
     fontFamily: 'Exo-Bold',
@@ -35,10 +43,13 @@ const styles = StyleSheet.create({
   image: {
     height: hp(8),
     width: wp(15),
-    borderRadius: hp(1.8),
-    borderWidth: 6,
+    borderRadius: hp(2),
+    borderWidth: 5,
     borderColor: 'white',
-    elevation: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 15,
+    backgroundColor: '#E8DBDB',
     // shadowColor: '#52006A',
   },
 });
