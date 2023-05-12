@@ -14,7 +14,8 @@ import SVGImgFilter from '../assets/images/filter.svg';
 import SVGImgFilterBlue from '../assets/images/filter_blue.svg';
 import SearchMenu from '../assets/images/searchMenu.svg';
 import {AllSubjects, AreaData} from '../dummyData/DummyDatas';
-const TeachersCard = ({item, index, length}) => {
+import StarRating from 'react-native-star-rating-widget';
+const InstitutionCard = ({item, index}) => {
   const [filterClick, setFilterclick] = useState(false);
   const [indexValue, setIndexValue] = useState();
   const [subindexValue, setsubIndexValue] = useState();
@@ -22,27 +23,57 @@ const TeachersCard = ({item, index, length}) => {
   console.log('index', index, item);
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          //   marginLeft: index > 0 ? hp(2) : hp(0),
-          //   marginLeft: index === 0 ? hp(2) : 0,
-          marginLeft: index === 0 ? hp(2.5) : hp(2),
-          marginRight: index === length - 1 ? hp(2.5) : 0,
-        },
-      ]}>
-      <Image style={{width: wp(28)}} source={item?.image} />
-      <View style={{alignItems: 'flex-start', marginTop: hp(0.5)}}>
-        <Text style={styles.title}>{item?.name}</Text>
+    <View style={[styles.container]}>
+      <View
+        style={{
+          backgroundColor: item?.color,
+          minHeight: hp(23),
+          borderRadius: 10,
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: wp(35),
+        }}>
+        <Image source={item?.image} />
+      </View>
+      <View style={styles.secondBox}>
         <Text
           style={{
-            fontFamily: 'Roboto-Regular',
+            fontFamily: 'Exo-Bold',
+            fontSize: RFValue(19),
             color: colors.heading,
-            fontWeight: '400',
+          }}>
+          {item?.name}
+        </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: hp(0.5),
+          }}>
+          <StarRating
+            starSize={hp(1.7)}
+            rating={item?.rating}
+            onChange={() => console.log('clicked')}
+          />
+          <Text>{item?.ratingValue}</Text>
+        </View>
+        <Text
+          style={{
+            fontFamily: 'Roboto-Bold',
+            color: colors.heading,
             marginTop: hp(0.5),
           }}>
           {item?.subjectName}
+        </Text>
+        <Text
+          style={{
+            fontFamily: 'Roboto-Regular',
+            color: '#121212',
+            fontWeight: '300',
+            fontSize: RFValue(12),
+            marginTop: hp(0.5),
+          }}>
+          {item?.details}
         </Text>
       </View>
     </View>
@@ -56,12 +87,18 @@ const styles = StyleSheet.create({
     // marginTop: hp(4),
     backgroundColor: '#ffff',
     minHeight: hp(25),
-    minWidth: wp(35),
+    // width: '100%',
     borderRadius: 10,
     alignItems: 'center',
-    paddingVertical: hp(1.5),
-    // paddingTop: hp(1.5),
+    paddingVertical: hp(1),
     paddingHorizontal: hp(1),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: hp(2),
+  },
+  secondBox: {
+    width: wp(48),
+    minHeight: hp(22),
   },
   filterElem: {
     marginVertical: hp(2),
@@ -109,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TeachersCard;
+export default InstitutionCard;

@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: hp(4),
+    paddingHorizontal: wp(5),
   },
   searchBar: {
     width: wp(70),

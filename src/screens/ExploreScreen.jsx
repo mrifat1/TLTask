@@ -1,10 +1,11 @@
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import React from 'react';
 import {colors} from '../constants/Theme';
 import {RFValue, hp, wp} from '../lib';
 import HeaderComp from '../components/HeaderComp';
 import SearchBar from '../components/SearchComp';
 import PopularTeacherComp from '../components/PopularTeacherComp';
+import PopularInstitutionComp from '../components/PopularInstitutionComp';
 
 const ExploreScreen = () => {
   return (
@@ -13,12 +14,14 @@ const ExploreScreen = () => {
         backgroundColor: colors.background,
         // alignItems: 'center',
         flex: 1,
-        paddingVertical: hp(2),
-        paddingHorizontal: wp(5),
+        paddingVertical: hp(3),
       }}>
-      <HeaderComp />
-      <SearchBar />
-      <PopularTeacherComp />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <HeaderComp />
+        <SearchBar />
+        <PopularTeacherComp />
+        <PopularInstitutionComp />
+      </ScrollView>
     </View>
   );
 };

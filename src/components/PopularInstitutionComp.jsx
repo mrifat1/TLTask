@@ -13,59 +13,42 @@ import {RFValue, hp, wp} from '../lib';
 import SVGImgFilter from '../assets/images/filter.svg';
 import SVGImgFilterBlue from '../assets/images/filter_blue.svg';
 import SearchMenu from '../assets/images/searchMenu.svg';
-import {AllSubjects, AreaData, Teachers} from '../dummyData/DummyDatas';
+import {
+  AllSubjects,
+  AreaData,
+  Colleges,
+  Teachers,
+} from '../dummyData/DummyDatas';
 import TeachersCard from './TeachersCard';
-const PopularTeacherComp = () => {
+import InstitutionCard from './InstitutionCard';
+
+const PopularInstitutionComp = () => {
   const [filterClick, setFilterclick] = useState(false);
   const [indexValue, setIndexValue] = useState();
   const [subject, setSubject] = useState('All Subjects');
   const [area, setArea] = useState();
   const [subindexValue, setsubIndexValue] = useState(0);
-  const [teachersData, setTeachersData] = useState([]);
+  const [institutionData, setInstitutionData] = useState([]);
 
   function AreaFilter(index, areaItem) {
-    setArea(index === indexValue ? null : areaItem?.name);
+    // setArea(index === indexValue ? null : areaItem?.name);
     setIndexValue(index === indexValue ? null : index);
-  }
 
-  function SubjectFilter(index, subjectItem) {
-    setSubject(subjectItem?.name);
-    setsubIndexValue(index);
-  }
-
-  useEffect(() => {
-    setTeachersData(Teachers);
-  }, [Teachers]);
-
-  useEffect(() => {
-    if (subject && subject === 'All Subjects') {
-      if (area && area !== undefined) {
-        let data = Teachers?.filter(item => item?.area === area);
-        setTeachersData(data);
-      } else {
-        setTeachersData(Teachers);
-      }
-    } else if (subject && subject !== undefined) {
-      if (area && subject && area !== undefined && subject !== undefined) {
-        let data = Teachers?.filter(
-          item => item?.subjectName === subject && item?.area === area,
-        );
-        setTeachersData(data);
-      } else if (subject && subject !== undefined) {
-        let data = Teachers?.filter(item => item?.subjectName === subject);
-        setTeachersData(data);
-      }
+    if (index === indexValue) {
+      setInstitutionData(Colleges);
+    } else {
+      let data = Colleges?.filter(item => item?.area === areaItem?.name);
+      setInstitutionData(data);
     }
-  }, [area, subject]);
+  }
+
+  useEffect(() => {
+    setInstitutionData(Colleges);
+  }, [Colleges]);
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: wp(5),
-        }}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={styles.title}>Popular Teachers</Text>
         {filterClick ? (
           <TouchableOpacity
@@ -82,7 +65,7 @@ const PopularTeacherComp = () => {
         )}
       </View>
       {filterClick && (
-        <View style={{paddingHorizontal: wp(5)}}>
+        <View>
           <View style={styles.filterElem}>
             <Text style={styles.subTitle}>Area</Text>
             <View
@@ -121,65 +104,22 @@ const PopularTeacherComp = () => {
               })}
             </View>
           </View>
-          <View style={styles.filterElem}>
-            <Text style={styles.subTitle}>Subjects</Text>
-            <View
-              style={{
-                marginTop: hp(1),
-                flexDirection: 'row',
-                width: wp(80),
-                flexWrap: 'wrap',
-              }}>
-              {AllSubjects?.map((item, index) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() => SubjectFilter(index, item)}
-                    style={{
-                      backgroundColor:
-                        index === subindexValue ? colors.purple : '#fff',
-                      paddingHorizontal: hp(1),
-                      paddingVertical: hp(0.8),
-                      borderRadius: 10,
-                      marginLeft: index > 0 ? hp(1) : hp(0),
-                      marginTop: hp(1.5),
-                    }}>
-                    <Text
-                      style={[
-                        styles.title,
-                        {
-                          fontFamily: 'Roboto-Regular',
-                          fontSize: RFValue(13),
-                          fontWeight: '400',
-                          color:
-                            index === subindexValue ? '#fff' : colors.heading,
-                        },
-                      ]}>
-                      {item?.name}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-          </View>
         </View>
       )}
-      <View style={{marginTop: hp(1)}}>
-        <FlatList
+      <View style={{marginTop: hp(2)}}>
+        {institutionData?.map((item, index) => {
+          return <InstitutionCard index={index} item={item} />;
+        })}
+        {/* <FlatList
+          //   showsHorizontalScrollIndicator={false}
+          //   horizontal
           nestedScrollEnabled
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          data={teachersData}
+          data={institutionData}
           keyExtractor={item => item.id}
           renderItem={(item, index) => {
-            return (
-              <TeachersCard
-                index={item?.index}
-                item={item?.item}
-                length={teachersData?.length}
-              />
-            );
+            return <InstitutionCard index={item?.index} item={item?.item} />;
           }}
-        />
+        /> */}
       </View>
     </View>
   );
@@ -190,6 +130,7 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'space-between',
     marginTop: hp(4),
+    paddingHorizontal: wp(5),
   },
   filterElem: {
     marginVertical: hp(2),
@@ -236,4 +177,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PopularTeacherComp;
+export default PopularInstitutionComp;
