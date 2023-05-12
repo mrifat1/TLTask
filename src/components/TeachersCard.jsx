@@ -32,19 +32,20 @@ const TeachersCard = ({item, index, length}) => {
           marginRight: index === length - 1 ? hp(2.5) : 0,
         },
       ]}>
-      <Image style={{width: wp(28)}} source={item?.image} />
-      <View style={{alignItems: 'flex-start', marginTop: hp(0.5)}}>
-        <Text style={styles.title}>{item?.name}</Text>
-        <Text
-          style={{
-            fontFamily: 'Roboto-Regular',
-            color: colors.heading,
-            fontWeight: '400',
-            marginTop: hp(0.5),
-          }}>
-          {item?.subjectName}
-        </Text>
-      </View>
+      <Image
+        style={{width: '100%', borderRadius: 10, height: hp(18)}}
+        source={item?.image}
+      />
+      <Text style={styles.title}>{item?.name}</Text>
+      <Text
+        style={{
+          fontFamily: 'Roboto-Regular',
+          color: colors.heading,
+          fontWeight: '400',
+          marginTop: hp(0.5),
+        }}>
+        {item?.subjectName}
+      </Text>
     </View>
   );
 };
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     minHeight: hp(25),
     minWidth: wp(35),
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingVertical: hp(1.5),
     // paddingTop: hp(1.5),
     paddingHorizontal: hp(1),
